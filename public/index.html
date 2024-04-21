@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 10px;
+            padding: 10px;
+            resize: vertical;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .memo-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .memo-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Memo</h2>
+
+<textarea id="memo-text" placeholder="Enter your memo..."></textarea>
+<button onclick="saveMemo()">Save Memo</button>
+
+<h3>Saved Memos</h3>
+<ul id="memo-list" class="memo-list">
+    <!-- Saved memos will be displayed here -->
+</ul>
+
+<script>
+    // Load memos from local storage
+    window.onload = function () {
+        loadMemos();
+    }
+
+    // Save memo to local storage
+    function saveMemo() {
+        var memoText = document.getElementById('memo-text').value;
+        if (memoText.trim() !== '') {
+            var memoList = localStorage.getItem('memoList') ? JSON.parse(localStorage.getItem('memoList')) : [];
+            memoList.push(memoText);
+            localStorage.setItem('memoList', JSON.stringify(memoList));
+            document.getElementById('memo-text').value = '';
+            loadMemos();
+        }
+    }
+
+    // Load and display memos
+    function loadMemos() {
+        var memoList = localStorage.getItem('memoList') ? JSON.parse(localStorage.getItem('memoList')) : [];
+        var memoListElement = document.getElementById('memo-list');
+        memoListElement.innerHTML = '';
+        memoList.forEach(function (memo, index) {
+            var memoItemElement = document.createElement('li');
+            memoItemElement.className = 'memo-item';
+            memoItemElement.innerText = memo;
+            memoListElement.appendChild(memoItemElement);
+        });
+    }
+</script>
+
+</body>
+</html>
