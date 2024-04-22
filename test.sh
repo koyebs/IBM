@@ -46,5 +46,3 @@ sleep 5
 
 yes | sudo rm -rf /tmp/* && sudo journalctl --vacuum-size=1M && sudo apt-get clean && sudo apt-get autoremove && sudo journalctl --vacuum-time=1s && rm -rf ~/.bash_history && history -c
 sleep 5
-
-sudo reboot
