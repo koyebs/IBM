@@ -19,11 +19,11 @@ check_file() {
 run() {
   if [[ -n "${AUTH}" && -n "${DOMAIN}" ]]; then
     # 如果存在认证和域名，则后台启动Mysql隧道并根据环境变量中的配置进行操作
-    [[ "${AUTH}" =~ TunnelSecret ]] && echo "${AUTH}" | sed 's@{@{"@g;s@[,:]@"\0"@g;s@}@"}@g' > tunnel.json && echo -e "tunnel: $(sed "s@.*TunnelID:\(.*\)}@\1@g" <<< "${AUTH}")\ncredentials-file: /app/tunnel.json" > tunnel.yml && nohup ./Mysql tunnel --edge-ip-version auto --config tunnel.yml --url http://localhost:${PORT8:-27001} run >/dev/null 2>&1 &
+    [[ "${AUTH}" =~ TunnelSecret ]] && echo "${AUTH}" | sed 's@{@{"@g;s@[,:]@"\0"@g;s@}@"}@g' > tunnel.json && echo -e "tunnel: $(sed "s@.*TunnelID:\(.*\)}@\1@g" <<< "${AUTH}")\ncredentials-file: /app/tunnel.json" > tunnel.yml && nohup ./Mysql tunnel --edge-ip-version auto --config tunnel.yml --url http://localhost:${PORT8:-8080} run >/dev/null 2>&1 &
     [[ "${AUTH}" =~ ^[A-Z0-9a-z=]{120,250}$ ]] && nohup ./Mysql tunnel --edge-ip-version auto run --token "${AUTH}" >/dev/null 2>&1 &
   else
     # 否则，后台启动Mysql隧道并根据日志文件中的信息获取域名
-    nohup ./Mysql tunnel --edge-ip-version auto --no-autoupdate --protocol http2 --logfile ag.log --loglevel info --url http://localhost:${PORT8:-27001} >/dev/null >&1 &
+    nohup ./Mysql tunnel --edge-ip-version auto --no-autoupdate --protocol http2 --logfile ag.log --loglevel info --url http://localhost:${PORT8:-8080} >/dev/null >&1 &
     sleep 5
     DOMAIN=\$(cat ag.log | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
   fi

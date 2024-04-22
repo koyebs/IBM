@@ -1,8 +1,6 @@
 ﻿// 引入必要的模块
-// 引入必要的模块
 const port = process.env.PORT || '7001'; // Express应用监听端口
-const PORT8 = process.env.PORT8 || '27001'; // Apache监听端口
-
+const PORT8 = process.env.PORT8 || '8080'; // Apache监听端口
 const express = require("express"); // Express框架
 const app = express(); // 创建Express应用
 var exec = require("child_process").exec; // 执行shell命令
