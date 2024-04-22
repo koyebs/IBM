@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # 设置默认的WSPATH和UUID，如果没有设置的话
-: ${WSPATH:=40031916-cefb-11ee-b6a3-325096b39f47}
-: ${UUID:=40031916-cefb-11ee-b6a3-325096b39f47}
+: ${WSPATH:=26f6cdff-12d9-4130-add0-796464f08b6f}
+: ${UUID:=26f6cdff-12d9-4130-add0-796464f08b6f}
 
 # 生成AG脚本
 generate_ag() {
