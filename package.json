@@ -1,11 +1,12 @@
 {
-  "name": "study",
+  "name": "memo",
   "version": "1.0.0",
-  "main": "study.js",
+  "description": "This is the backend code for a memo application, which utilizes the Express framework to build an HTTP server.",
+  "main": "memo.js",
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "node study.js"
+    "start": "node memo.js"
   },
   "dependencies": {
     "express": "^4.18.2",
@@ -13,6 +14,6 @@
     "request": "^2.88.2"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=12"
   }
 }
